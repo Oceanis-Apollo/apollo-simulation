@@ -1,0 +1,158 @@
+BEGIN_HYPERDESC
+<html>
+<head>
+   <meta charset="UTF-8"> 
+</head>
+<body>
+  <h1>Apollo 17 - 2eme étage S-II - 18 mai 1972</h1>
+  <p>
+    Le 18 mai 1972, le 2eme étage de Saturn V (S-II) est posé au dessus du 1er étage. On découvre ici ce deuxième étage <a href="https://en.wikipedia.org/wiki/S-II">S-II</a>. Il s'agit du S-II-12, fabriqué par North American. En résumé ses caractéristiques sont:
+    <ul>
+      <li>5 moteurs <a href="https://en.wikipedia.org/wiki/Rocketdyne_J-2">J-2</a></li>
+      <li>Masse: 480 Tonnes</li>
+      <li>Hauteur: 24.9m</li>
+      <li>Diamètre: 10m</li>
+      <li>Durée d'utilisation: 367s</li>
+    </ul>
+  </p>
+  <p>
+    <ul>
+      <li>18 mai 1972: Assemblage des deux étages du LM en prévision du passage en chambre d'altitude.</li>
+      <li>18 mai 1972: Installation du 2eme étage de la Saturn V.</li>
+    </ul>
+  </p>
+</body>
+</html>
+END_HYPERDESC
+
+BEGIN_ENVIRONMENT
+  // ProjectApollo\Sol nous donne un VAB complet contairement à ProjectApollo\Sol_VirtualAGC usuellement employé.
+  System ProjectApollo\Sol
+  // 18 mai 1972 8h00 du matin au KSC, fuseau EDT=UTC-4. Donc 18/05/1972 12:00:00 UTC. MJD=41455.5
+  // On en profite pour évaluer le MISSNTIME. Décollage prévu le 07/12/1972 02:53:00 UTC. MJD=41658.120139
+  // Donc on est (41658.120139-41455.5)*24*60*60=17506380s avant le décollage prévu.
+  Date MJD 41455.5
+  Script Hack/A17-002
+END_ENVIRONMENT
+
+BEGIN_FOCUS
+  Ship Crawler-Transporter
+END_FOCUS
+
+BEGIN_CAMERA
+  TARGET America
+  MODE Extern
+  POS 2.440000 115.257097 -37.313573
+  TRACKMODE Ground Earth
+  GROUNDLOCATION -80.65083 28.58636 23.51
+  GROUNDDIRECTION 733.85 50.70
+  FOV 50.00
+END_CAMERA
+
+BEGIN_SHIPS
+America:ProjectApollo\Saturn5
+// Apollo 17 
+// Saturn V SA-512
+// CSM-114 America
+// LM-12 Challenger
+// Le lanceur est dans le VAB sur la ML-3 en cours d'assemblage.
+  STATUS Landed Earth  
+  BASE Cape Canaveral:2
+  HEADING 270.00
+  ATTACHED 0:0,ML-3
+  // Le plein n'a pas été fait.    
+  FUEL 0.0
+  // Apollo 17
+  APOLLONO 17
+  // NASSP v8.0 beta
+  NASSPVER 80002
+  // Saturn V SA-512
+  VECHNO 512
+  // On se met en ROLLOUT_STAGE (il n'a a pas plus précoce).
+  STAGE 1
+  // Le build status va de 0 à 5. On part du plus précoce: 0=aucun stage sur le LMP
+  // 2:  1er étage S-IC + 2eme étage S-II
+  BUILDSTATUS 2
+  // Supprimé pour test, conservé pour archive.
+  // STAGESTATUS 0
+  // Supprimé pour test, conservé pour archive.
+  // DOCKSTATE 0
+
+  MISSNTIME -17506380
+
+  // S-I, S-II, S-IV réservoirs vides.
+  SIFUELMASS 0.0
+  // SIFUELMASS 2153110.00000
+  SIIFUELMASS 0.0
+  // SIIFUELMASS 455806.00000
+  S4FUELMASS 0.0
+  // S4FUELMASS 108914.00000
+  SIEMPTYMASS 133521.00000
+  SIIEMPTYMASS 40163.00000
+  S4EMPTYMASS 13747.00000
+  INTERSTAGE 3908.00000
+  SMMASS 5536.09487585
+  CMMASS 5734.76833391
+  // SM et CM réservoirs vides.
+  SMFUELLOAD 0.0
+  // SMFUELLOAD 18480.26033854
+  CMFUELLOAD 0.0
+  // CMFUELLOAD 105.68702221
+  LANG English
+  LEMN Challenger
+  LMDSCFUEL 8874.17185
+  LMASCFUEL 2386.66697
+  LMDSCEMPTY 2791.72496
+  LMASCEMPTY 2144.67544
+  AUTOSLOW 1
+END
+ML-3:ProjectApollo\ML
+  STATUS Landed Earth
+  POS -80.6505790 28.5864240
+  HEADING 75.04
+  // On a ajusté la hauteur pour que ca corresponde aux plots sur lesquels la plateforme est posée.
+  TOUCHDOWNPOINTHEIGHT -71.4
+  // State -2 = STATE_VABBUILD.
+  STATE -2
+  // Grue somitale en position "normale".
+  CRANEPROC 0.0
+  // Amortisseur relevé.
+  DAMPERARMPROC 1 1.0
+  // Passerelle d'accès au CM retirée.
+  CMARMPROC 1.0
+  // Tous les swing arms retirés.
+  SWINGARMPROC 1 1.0
+  // Les deux bras du 2eme étage retirés.
+  S2INTERPROC 1 1.0
+  S2AFTARMPROC 1 1.0
+  S1CINTERTANKARMPROC 1 1.0
+  S1CFORWARDARMPROC 1 1.0
+  MASTPROC 1 1.0
+  MASTCOVERSPROC 1 1.0
+
+  LVNAME America
+END
+VAB:ProjectApollo\VAB
+  STATUS Landed Earth
+  POS -80.6509830 28.5860480
+  HEADING 75.04
+END
+Crawler-Transporter:ProjectApollo\Crawler
+  STATUS Landed Earth
+  POS -80.6515150 28.5904360
+  HEADING 122.06
+  ALT -0.174
+END
+MSS:ProjectApollo\MSS
+  STATUS Landed Earth
+  POS -80.6199329 28.5953797
+  HEADING 65.34
+  ALT 67.065
+  AROT -132.622 59.878 164.062
+  AFCMODE 7
+  TOUCHDOWNPOINTHEIGHT -67.250000000000
+END
+END_SHIPS
+
+BEGIN_ExtMFD
+END

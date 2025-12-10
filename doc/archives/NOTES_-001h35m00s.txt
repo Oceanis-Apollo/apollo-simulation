@@ -1,0 +1,38 @@
+-0:35:00
+v16n20e: pour vérifier la cohérence FDAI/IMU
+v06n29e: azimuth de lancement (d'après nul)
+v78e: azimuth de lancement (d'après la checklist Apollo)
+En fait v78e affiche bien l'azimuth actuel et propose v06n29e pour l'éditer (comme dit nul)
+On l'édite par:
+v21e+07200ep
+
+Nul ajoute les paramètres d'orbite LOI(LOI???) J'y mets les paramètres d'orbite de parking
+Nul parle de km. Delco dit que le format est XXXX.Xnmi
+v06n44e
+v21e+00934e
+v22e+00897e
+
+Pour regarder l'heure
+v16n65e
+On note qu'après minuit c'est pas retour à 00h00... Peut être faudrait il corriger mais j'ai pas fait
+Pour l'heure de décollage (on met 26h53m00s)
+v06n33e
+v25e+00026e+00053e+00000e
+
+
+Launch Azimuth: 72°
+Apogée:93.4nmi
+Périgée:89.7nmi
+décollage 02h53m00s UTC
+
+tester
+n78e
++090.00
++052.00
++180.00
+n70e
+00050
+
+
+
+

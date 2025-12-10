@@ -1,0 +1,106 @@
+BEGIN_HYPERDESC
+<html>
+<head>
+   <meta charset="UTF-8"> 
+</head>
+<body>
+  <h1>Apollo 17 - Construction</h1>
+  <p>D'après le press kit A17 (p15, pdf:20/176):</p>
+  <blockquote>
+    <p>
+      Flight hardware for Apollo 17 began arriving at KSC in October, 1970, while Apollo 14 was undergoing checkout in the VAB.
+    </p>
+    <p>
+      The command/service module arrived at KSC in late March, 1972 , and was placed in an altitude chamber in the MSOB for systems tests and unmanned and manned chamber runs. During these runs, the chamber air was pumped out to simulate the vacuum of space at altitudes in excess of 200,000 feet. It is during these runs that spacecraft systems and astronauts' life suppor t systems are tested.
+    </p>
+    <p>
+      The lunar module at KSC in June and its two stages were moved into an altitude chamber in the MSOB after an initial receiving inspection. It, too, was given a series of systems tests and unmanned and manned chamber runs. The prime and back-up crews participated in the chamber runs on both the LM and the CSM.
+    </p>
+    <p>
+      In July, the LM and CSM were removed from the chambers. After installing the landing gear on the LM and the SPS nozzle on the CSM, the LM was encapsulated in the spacecraft LM adapter (SLA) and the CSM was mated to the SLA. On August 24, the assembled spacecraft was moved to the VAB where it was mated to the launch vehicle.
+    </p>
+    <p>
+      The Lunar Roving Vehicle (LRV), which the Apollo 17 crew will use in their exploratory traverses of the lunar surface, arrived at KSC on June 2. Following a series of tests, which included a mission simulation on August 9 and a deployment demonstration on August 10, the LRV was flight installed in the Lunar Module's descent stage on August 13.
+    </p>
+    <p>
+      Erection of the Saturn V launch vehicle's three stages and instrument unit on Mobile Launcher 3 in the VAB's High Bay 3 began on May 15 and was completed on June 27. Tests were conducted on individual systems on each of the stages and on the overall launch vehicle hefore the spacecraft was erected atop the vehicle on August 24.
+    </p>
+    <p>
+      Rollout of the space vehicle from the VAB to Pad A at KSC's Launch Complex 39 was accomplished on August 28.
+    </p>
+    <p>
+      Processing and erection of the Skylab 1 and Skylab 2 launch vehicles was underway in the VAB while preparations were made for moving Apollo 17 to the pad, giving KSC three Saturn space vehicles "in flow" for the first time since the peak of Apollo activity in 1969.
+    </p>
+    <p>
+  </blockquote> 
+  <p>
+    Ce scénario débute avec le commencement de l'érection de la Saturn V, donc le 15 mai, et s'arrête avant le transport vers le pas de tir.
+  </p>
+  <ul>Etapes:
+    <li>15 mai 1972: début de l'érection de la Saturn V.</li>
+    <li>27 juin 1972: fin de l'érection de la Saturn V.</li>
+    <li>24 aout 1972: dépose du train spatial (LM + CSM) au sommet de la Saturn V.</li>
+    <li>28 aout 1972: transport vers le pas de tir.</li>
+  </ul>
+</body>
+</html>
+END_HYPERDESC
+
+BEGIN_ENVIRONMENT
+  // ProjectApollo\Sol nous donne un VAB complet contairement à ProjectApollo\Sol_VirtualAGC usuellement employé.
+  System ProjectApollo\Sol
+  // 15 mai 1972 8h00 du matin au KSC, fuseau EDT=UTC-4. Donc 15/05/1972 12:00:00 UTC. MJD=41452.5
+  // On en profite pour évaluer le MISSNTIME. Décollage prévu le 07/12/1972 02:53:00 UTC. MJD=41658.120139
+  // Donc on est (41658.120139-41452.5)*24*60*60=17765580s avant le décollage prévu.
+  Date MJD 41452.5
+  Script Hack/007
+END_ENVIRONMENT
+
+BEGIN_FOCUS
+  Ship Crawler-Transporter
+END_FOCUS
+
+BEGIN_CAMERA
+  TARGET VAB
+  MODE Extern
+  POS 2.440000 115.257097 -37.313573
+  TRACKMODE Ground Earth
+  GROUNDLOCATION -80.60407 28.60832 39488.69
+  GROUNDDIRECTION 195.0 -90.0
+  FOV 50.00
+END_CAMERA
+
+BEGIN_SHIPS
+ML-3:ProjectApollo\ML
+  STATUS Landed Earth
+  POS -80.6505790 28.5864240
+  HEADING 75.04
+  // On a ajusté la hauteur pour que ca corresponde aux plots sur lesquels la plateforme est posée.
+  TOUCHDOWNPOINTHEIGHT -71.4
+  // State -2 = STATE_VABBUILD.
+  STATE -2
+  // Grue somitale en position "normale".
+  CRANEPROC 0.0
+  // Amortisseur relevé.
+  DAMPERARMPROC 1 1.0
+  // Passerelle d'accès au CM retirée.
+  CMARMPROC 1.0
+  // Tous les swing arms retirés.
+  SWINGARMPROC 1 1.0
+  // Les deux bras du 2eme étage retirés.
+  S2INTERPROC 1 1.0
+  S2AFTARMPROC 1 1.0
+  LVNAME America
+END
+VAB:ProjectApollo\VAB
+  STATUS Landed Earth
+  POS -80.6509830 28.5860480
+  HEADING 75.04
+END
+Crawler-Transporter:ProjectApollo\Crawler
+  STATUS Landed Earth
+  POS -80.6515150 28.5904360
+  HEADING 122.06
+  ALT -0.174
+END
+END_SHIPS

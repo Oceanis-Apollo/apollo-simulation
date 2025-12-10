@@ -1,0 +1,75 @@
+5) DSKY:
+Vrai nom CMC ou AGC
+5|GUIDANCE/NAVIGATION|COMPUTER: cb CMC.
+8|INTERIOR LIGHTS|NUMERICS: select intensité d'affichage (en réalité éteint ou allumé).
+
+
+
+6) SPS:
+SPS=Service Propulsion System (moteur principal).
+Les ergols sont pressurisés par de l'hélium. Les vannes qui ouvrent les réservoirs sont commandées pneumatiquement par de l'azote. La réaction carburant comburant est spontannée, si on ouvre les deux valves le moteur demarre spontanément. Le nmoteur dispose d'un cardan (gimbal) pour pousser dans l'axe du centre d'inertie. C'est obtenu par asservissement.
+L'hélium et les ergols sont mélangés, c'est pour cela qu'il faut un ullage.
+3|SPS PRPLNT TANK|PRESS: Aff pressions moteur, dans l'ordre
+	TEMP ne fait pas partie de la section PRESS
+	He: en fonction de 3|SPS|PRESS IND:
+		He: Pression de l'hélium qui ser à presser les ergols du SPS.
+		N2A, N2B: Pression des réservoirs d'azote qui pilotent les vannes d'ergols.
+	FUEL: Pression de carburant.
+	OXID: Pression de comburant.
+3|SPS He VLV: Commande des valves d'hélium. 1 pour carburant 2 pour comburant. AUTO: commande par logique vaisseau (CMC). ON/OFF: commande manuelle.
+3|SPS ENGINE INJECTION VALVES: aff de l'état des valves d'injection commandées par l'azote.
+1|SPS GIMBAL (même affichage que 1|LV TANK PRESS): aff des angles moteurs/vérins (gimbal) redondés pour le lacet et le cabrage. On y trouve aussi les molettes
+8|STAB CONT SYSTEM: AC1 affichage pitch yaw droite, AC2 affichage pitch yaw gauche.
+1|SPS GIMBAL|PITCH,YAW: cabrage et lacet.
+3|SPS QUANTITY: aff de l'équilibre carburant comburant. L'affichage OXID UNBAL décrit l'action a opérer sur le communtateur
+3|OXID FLOW VALVE|INCR,DECR
+3|SPS PRPLNT TANK|TEMP: Indique la température du moteur qui se trouvant à l'extérieur peut subir de grosses variation entre l'ombre et le plein Soleil. Cette température qui devrait être entre 45 et 100°F, est controlée soit en utilisant l'exposition soit en utilisant des réchauffeurs:
+3|SPS|LINE HTRS: A/B 12 réchauffeurs, A 6 réchauffeurs, ou OFF (millieu).
+8|STABILIZATION CONTROL SYSTEM|DIRECT ULL: cb direct ullage.
+1|LV/SPS IND: Commutateur des affichages 1|LV TANK PRESS/1|SPS GIMBAL (LV=Launch Vehicle).
+1|LVα/SPS PC: affiche 100 quand le SPS est en poussée. Pour le LV c'est la pression dynamique.
+Pour que le ullage fonctionne il faut que 
+2|HELIUM 1,2
+2|PRIM,SEC PRPLNT
+soient actifs
+1|SPS THRUST: Commande du moteur SPS.
+1|ΔV THRUST
+
+http://www.ibiblio.org/mscorbit/mscforum/index.php?topic=2290.0
+http://nassp.sourceforge.net/wiki/Service_Propulsion_System
+
+Lancer SPS en automatique
+Scenario Apollo 8 - 06
+1|ΔV THRUST A ou B: NORMAL
+1|SC CONT:CMC
+THX: NEUTRAL
+3|SPS He VLV A/B: AUTO
+V37E30E
+V25E
++00009E
++00000E
++00000E
+P
+V21E
++10000E
+V22E
++00000E
+V23E
++00000E
+P
+affichage des paramètres orbitaux
+P
+affichage compte à rebours et angle cardans
+P
+Demande de changement de programme
+40E
+Orientation du vaisseau qu'on valide par ENTER
+E
+P
+Compte à rebours
+
+1|EVENT TIMER: Chronomètre de mission
+	RESET/DOWN: Reset, compte à rebours
+	START/STOP: start/stop
+	MIN: Réglage minutes (haut: dizaines, bas: unités)
+	SEC: Réglage secondes (haut: dizaines, bas: unités)

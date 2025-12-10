@@ -1,0 +1,52 @@
+22/06/2019
+Installation de Orbiter 2016.
+Page de référence: http://orbit.medphys.ucl.ac.uk/download.html
+Autre source: https://www.orbiter-forum.com/showthread.php?t=40351
+NOTA BENE: 4Gb de RAM et carte graphique rapide.
+
+Orbiter Core: 
+http://orbit.medphys.ucl.ac.uk/mirrors/orbiter_radio/base_mirror.html
+Installation MSI, fichier Orbiter2016.exe. Version installée: build 28 AUg 2016 (v 160828). Installation en mode "Custom" pour définir le répertoire racine d'Orbiter: D:\Orbiter2016\. Tous les composants ont été installés (y compris le SDK).
+On vérifie que l'installation fonctionne en lançant Orbiter 2016 (pas server). On teste un scénario au hasard pour vérifier que tout va bien.
+Paramétrage, activer: Complex flight model, Damage and failure simulation, Limited fuel, Nonspherical gravity sources. Désactiver: Auto-refuel on pad, Radiation pressure, Gravity-gradient torque.
+
+Jarmonik's D3D9:
+http://users.kymp.net/~p501474a/D3D9Client/
+Moteur graphique pour Orbiter. C'est là qu'on trouve le plus récent. Fichier installé: D3D9ClientR3.7-forOrbiter2016(r1093).zip. Pour l'installation on utilise 7-Zip, "extraire les fichiers...", "Extraire vers:", et on choisit D:\Orbiter2016\.
+On vérifie que tout fonctionne en lançant Orbiter 2016 server. Dans "Modules", on coche "Graphics engines/D3D9Client". On lance un scénario pour vérifier que tout fonctionne.
+Comme un écran ridicule s'est ouvert, on a modifié le paramétrage "Video". "Fixed aspect ratio": 16:9 et "Width":1900.
+
+XRSound:
+https://www.alteaaerospace.com/index-3.html
+Fichier installé: XRSound-1.1.zip. Release date: 9-Mar-2018. Installé en dézippant classiquement dans la racine d'Orbiter.
+On vérifie que le son fonctionne en lançant Orbiter server. On active le module en cochant "Sound module for Orbiter/XRSound". On ouvre un scénario, et on vérifie qu'il y a bien du son.
+
+Apollo NASSP:
+https://sourceforge.net/projects/nassp/
+https://sourceforge.net/projects/nassp/files/
+Fichier installé: NASSP-V8.0-Alpha-Orbiter2016-1452.zip. Le fichier est installé classiquement en le dézippant dans la racine d'Orbiter. On a accepté toutes les modifications de fichiers, lorsque 7-Zip nous a averti qu'il allait écraser une version précédente d'un fichier.
+On vérifie que NASSP fonctionne en lançant Orbiter server et en choissant par exemple le scénario "Project Apollo NASSP/Apollo Mission Scenarios/Apollo11/Apollo 11 - 02 - Before Launch T-30sec". Normalement la Saturn V décolle et on peut la suivre jusque dans l'espace sans problème.
+Par ailleurs NASSP demande qu'on active le module "MFD modes/ProjectApolloMFD".
+
+Textures haute résolution:
+http://orbit.medphys.ucl.ac.uk/mirrors/orbiter_radio/tex_mirror.html
+On télécharge les textures de la Lune, fichiers Elev.tree, Label.tree, et Surf.tree. Dans D:\orbiter2016\Textures\Moon\Archive on renomme d'abord Elev.tree en Elev.tree.lores et Surf.tree en Surf.tree.lores. Puis on copie les 3 nouveaux fichiers dans ce répertoire.
+Si on va sur le site d'atressisage d'Apollo 11, à courte distance le rendu est assez moche.
+On installe le pack micro textures D3D9.
+http://users.kymp.net/~p501474a/D3D9Client/
+C'est le fichier MicroTextures.zip, qu'on installe classiquement en le dézippant dans la racine d'Orbiter. On accepte d'écraser un fichier antérieur.
+Et maintenant lorsqu'on zoome sur le LEM Eagle dans la mer de la Tranquilité, c'est bluffant!
+On fait de même avec les fichiers de la Terre (Earth). Dans D:\Orbiter2016\Textures\Earth\Archive on renomme les fichiers initiaux en: Cloud.tree.lowres, Elev.tree.lowres, Elev_mod.tree.lowres, Mask.tree.lowres, et Surf.tree.lowres. Puis on copie dans ce répertoire les fichiers haute définition: Cloud.tree, Elev.tree, Label.tree, Elev_mod.tree, Mask.tree, et Surf.tree.
+On vérifie à nouveau que tout fonctionne, en laçant un scénario de décollage.
+A ce stade tout doit être OK!
+
+Tutoriel NASSP:
+http://francophone.dansteph.com/?page=tutorials&version=5&sort=byname
+Fichier: TutoNASSPNulentout.zip
+Après avoir déployé l'archive tutoriel, copier Tutoriel NASSP TOME 1\Scènes du tutoriel pour NASSP dans D:\Orbiter2016\Scenarios.
+
+Mission Pause MFD:
+NulEnTout, dans son tutoriel suggère fortement d'installer ce MFD. 
+https://app.box.com/s/8b4l0669ai
+Fichier Mtimer.zip. Il est installé classiquement. Activer le module "Miscellaneous/MTimer".
+Ce MFD permet de définir une accélération, et une mise en pause automatique à un GET donné. Une fois programmé, on le met en rout (ON) l'accélération programmée est utilisée jusqu'au GET, et là le simulateur se met en pause. Il n'y a plus qu'à mettre sur OFF pour reprendre la main.

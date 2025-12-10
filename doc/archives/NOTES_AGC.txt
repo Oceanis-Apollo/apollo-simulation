@@ -1,0 +1,145 @@
+Basé sur la checklst de Nul:
+7|EDS PWR: on (up)
+7|BMAG PWR|1,2: on, attendre 20s
+7|FDAI GPI PWR: BOTH
+7|SCS ELECTRONICS POWER ECA: GDC/ECA
+7|SIG COND/DRIVER BIAS PWR|PWR SUP|1: AC1
+7|SIG COND/DRIVER BIAS PWR|PWR SUP|2: AC2
+On allume le CMC:
+5|GUIDANCE/NAVIGATION|COMPUTER|MNA,MNA: cb fermés
+aff: PROG RESTART
+RSET
+v35e
+v36e
+v37e00e
+100|G/N POWER|IMU: on (up)
+aff: NO ATT
+1|CMC ATT: IMU
+1|FDAI|SOURCE: CMC
+GDC ALIGN
+aff: !NO ATT
+v37e01e
+Normalement tout va bien....
+
+
+
+
+Sur le scenar A17, le CMC est à l'arrêt et vide.
+Quand on l'allume ca s'arrête sur deux voyants: PROG, RESTART
+PROG: prog alarm
+RESTART: il y a eu un restart durant l'execution d'un programme (supprimé par RESET)
+Ca fait genre un programme tournait et a été planté par l'arret du computer
+
+v70e
+aff:p27v21n01
+Mais... ca sert pas à grand chose à ce stade
+
+Avoir un code d'erreur: v05n09 
+les codes sont en p4 de Delco
+
+v37p06e
+Power down
+aff: v50n25
+00062
+Eteindre
+
+!!!RAZ:on reprend du début
+IMU activé on ralume le CMC
+v05n09
+aff: erreur 01107
+Le doc nul: CMC/DSKY COLOSSUS dit qu'il faut retablie REFSMAT
+On tente tout de même une init du CMC
+RSET
+v37e01e
+PROG + NO ATT pas bon!
+v05n09e
+aff: 00210/00211/01601 IMU non prête, erreur d'alignement, abandon mauvais couple IMU
+On a un pb IMU
+Tentative nul: CHECKLIST Preparation au lancement p 8
+RAZ CMC (avec les cb)
+On a toujours un NO ATT
+v35e
+Le test est OK (evidemment!)
+v37e00e
+v16n65e
+L'heure affichée est correcte (ne devrait-il pas y avoir le GET négatif dans l'une des deux?)
+Même doc p 12...
+RAZ CMC
+On déroule le machin et p01->err 00211/01601/01601
+
+Issu de http://www.ibiblio.org/mscorbit/mscforum/index.php?action=printpage;topic=178.0
+On a coupé les cb 5| IMU et CMC, 100|IMU off, et 1|IMU cage
+On rallume le CMC avec les cb
+On passe en P00 v37e00e
+On ferme cb IMU, 100|IMU on, et on décage en refermant la sécurité
+Petit passage par une erreur 01520, mais c'est passé.
+v37e00e
+NO ATT disparait
+Passage sur P01
+v37e01e
+NO ATT on puis off->P02 et PAS d'ERREUR affichée
+La procédure est pas au top mais y'a un bricolage du genre qui fonctionne (à compléter)
+### EN FAIT CA MARCHE PAS! ###
+
+v16n36 affiche l'heure (légèrement décalée) NOTA: Orbiter EST EN UTC.
+
+Dans le scénar Apollo 11 T-20mn, on peut avoir le compte à rebours par:
+v16n36e (on est en P02)
+Sur le scénar Apollo 17, on a l'heure, mais on peut changer les valeurs v25e et mettre par exemple: -00002/-00000/-00000
+NOTA: Le compte à rebours dans le MFD n'est pas modifié. Et c'est visiblement lui qi compte.
+
+On doit pouvoir bidouiller le scénar Apollo 17.
+Actuellement il contient:
+  Date MJD 41657.953472
+  MISSNTIME -14400
+La date correspond à UTC: 06/12/1972 22:52:59
+En réalité le départ n'a pas été UTC 02:53:00
+mais 2h40 plus tard, soit UTC 05:33:00
+Donc on corrige   MISSNTIME en rajoutant 2:40:00 = 160:00 = 9600
+  MISSNTIME -24000
+On teste le scenar
+On se débrouille à passer en P01
+Tant qu'on y est on regarde v16n36e
+
+
+On reprend la procédure pour initialiser le CMC
+Il ne faut pas aller trop vite lorsqu'on passe de P00 à P01
+Init scenar skipped
+Activation IMU (100)
+CMC on (cb)
+RSET
+v37e00e
+v37e01e
+PROG
+err: 210
+RAZ IMU: IMU off + on 
+RSET
+NO ATT
+v37e00e
+err: 1520 (trop rapide)
+RSET
+v37e00e
+Il faut un peu instister et patienter entre chaque essai
+Un laisse le CMC se reposer un peu et on fait:
+v37e01e
+Et ca passe!!! OU pas...
+
+
+
+Pour éditer le compte à rebours:
+v16n36e
+v25e
+
+Après fermeture de l'écoutille pas de départ sur le scénar skipped. 
+On fait le test sur le scenar d'origine pour voir si c'est pareil. ET c'est pareil. Il faut donc terminer les checklist pour vérifier l'effet de la modif de scenar.
+
+
+
+Biblio:
+http://nassp.sourceforge.net/wiki/Virtual_AGC
+drive:A15Delco.pdf
+drive:The-Apollo-Guidance-Computer-Architecture-and-Opera	tions.pdf
+http://www.ibiblio.org/apollo/
+http://nassp.sourceforge.net/wiki/Coast_Programs
+https://svtsim.com/moonjs/agc.html
+http://nassp.sourceforge.net/wiki/Simple_AGC

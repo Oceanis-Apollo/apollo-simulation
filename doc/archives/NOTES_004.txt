@@ -1,0 +1,148 @@
+Gimbal SPS
+8|STAB CONST SYSTEM|AC1,AC2: cb alimentation des affichages respectivement gauche et droite (redondance)
+LV/SPS IND: sw GPI active l'affichage des angles gimbal SPS (SII/SIVB affiche le niveau d'ergols des composants du LV)
+1|SPS GIMBAL|PITCH,YAW: aff des angles gimbal SPS
+Sous l'affichage on trouve des molettes qui permettent de régler les angles manuellement
+1|SPS GIMBAL MOTORS|PITCH,YAW: sw astable de commande des relais on/off des moteurs de gimbal. ATTENTION: soit on active 1 soit 2 (moteurs redondés), les deux ne peuvent pas être activées ensemble.
+250|BAT A,B PWR ENTRY/POST LANDING: cb des commandes de relais précédentes
+7|SCS|TVC SERVO POWER: sw alimentation des commandes relais précédents ligne 1 ou 2 par MAIN A ou MAIN B
+1TVC GIMBLE DRIVE|PITCH,YAW: 1 ou 2 ou auto est la ligne d'alimentation, sur AUTO c'est 1 qui est activé en priorité. Ca veut dire que sur AUTO 1|SPS GIMBAL MOTORS|PITCH:2 et 1 c'est 1 qui est utilisé. Activer la ligne 1 semble buggué, seul la ligne 2 fonctionne en manuel (manque d'énergie dans la pile?). Bug sans doute expliqué par les cb suivants
+8|SERVICE PROPULSION SYS|PITCH,YAW: cd Alimentation des lignes moteur 1 et 2 pat MAIN A ou B.
+1|SC CONT: CMC ordinateur, SCS manuel
+Tout est contrôlé par le programme P40
+
+
+
+Décolage
+Check list de vol cf. https://history.nasa.gov/afj/ap11fj/a11-documents.html Inflight Documents.
+Il faut les préparer
+
+
+
+OSS
+Optics SubSystem, SXT: sextan, SCT: telescope à balayage
+Enlever les caches:
+5|GUIDANCE/NAVIGATION|OPTICS|MNA,MNB: cb alimentation OSS
+100|G/N POWER|OPTICS: activation OSS(?)
+122|OPTICS|ZERO: ici OFF.
+122|OPTICS|MODE: CMC ou MAN (manuel) ici MAN.
+122|OPTICS|COUPLING CONT: ici DIRECT.
+122|OPTICS|SPEED: ici HI.
+Minimanche de droite de SXT ou SCT à droite => éjection
+https://history.nasa.gov/afj/ap11fj/a11csmoc/a11-csmoc-f2-02.jpg
+
+Réaligner IMU
+5|GUIDANCE/NAVIGATION|OPTICS|MNA,MNB: cb alimentation OSS
+100|G/N POWER|OPTICS: activation OSS(?)
+1|CMC MODE: FREE
+1|BMAG MODE|ROLL,PITCH,YAW: RATE 2
+
+Pour SXT et SCT les touches zqsd fonctionnent.
+122|OPTICS|SPEED: définit la vitesse
+V37E00E; prog 00
+V16N91E; angles SHAFT et TRUNNION (x100)
+
+122|OPTICS|ZERO: ZERO provoque un RAZ optique visible dans le DSKY
+122|OPTICS|MODE: CMC ou MAN (manuel) ici MAN.
+
+V37E52E; prog 52
+https://history.nasa.gov/afj/ap11fj/a11csmoc/a11-csmoc-f6-02.jpg
+V22E00003EP 3=REFSMAT (cf checklist apollo 11 ci dessus).
+P
+
+Sur P52 V05 
+N0900405
+Retourner le vaisseau 
+P
+01 70
+00000
+Il faut choisir une étoile
+Ex Alpheca (32)
+On pointe pour l'instant le téléscope au dessus de la cible
+V21E00032EP
+Le CMC pointe l'étoile, on corrige en MAN et MARK
+Affichage de 
+50 25
+00016
+On fait 
+P
+Rappel de l'étoile
+01 71
+00032
+P
+De nouveau 
+01 71
+00000
+ON choisit une autre étoile
+Ex: Vega (36)
+V21E00036EP
+Mark
+rappel
+P
+P
+Affichage de l'erreur (x100)
+P52 V06 N05
++00000
+P pour accepter
+V32E pour anuller
+
+Affichage des angles de correction
+P52 V06 N93
++00004
++00010
++00012
+P
+P52 V50 N25
++00014
+Siginifie IMU réalignée
+P
+P52 V50 N25
++00015
+C'est fini!
+
+
+
+En programme 00 initialement
+V48E
+affiche V04 N46
+cf Exploitation du CMC/DSKY p3
+11102
+01111 = 4 derniers bits quads actifs
+R1 plus compliqué
+	1er bit 1=CSM seul, 2=CSM+LEM, 6=CSM+LEM retour Lune
+	4e bit=ERR DEAD BAND meilleur sur 0 (1°), 1 (5°)
+	5e bit=accélération appliquée par les RCS
+	
+On corrige éventuellement avec V21E ou V22E
+P
+
+Affichage V06 N47
++32170 masse du CSM (pounds)
++00000 masse LEM
+On corrige 
+CTRL+I 14464.9kg (*2.2046 ou Google) 31889pounds
+V21E +31889E
+P
+
+Affiche V06 N48
+Angles d'ajustement pitch yaw (SPS? il semble)
+P
+
+DSKY repasse à P00
+
+1|SC CONT: sur CMC
+1|CMC MODE: sur AUTO
+
+V46E active le DAP (pilote automatique)
+
+V49E Pour changer l'attitude
+Affichage V06 N22 avec l'attitude actuelle, qu'on va pouvoir éditer
+V21E V22E V23E selon le cas
+Ou les 3 V25E 
+Ne pas oublier les + !!!
+P
+V50 N18 affiche les angles programmés
+P et parfois encore P, il peut aussi y avoir des pb qui necessitent un RST... Insister!
+roll
+pitch
+yaw

@@ -1,0 +1,159 @@
+BEGIN_HYPERDESC
+<html>
+<head>
+   <meta charset="UTF-8"> 
+</head>
+<body>
+  <h1>Apollo 17 - Chargement du Crawler - 28 aout 1972</h1>
+  <p>
+    Le 28 aout 1972, le lanceur est complet avec à son sommet le LES qui a été installé quelques jours plus tôt. Il est prêt pour le transfert vers le Launch Pad 39B. 
+  </p>
+  <p>
+    On est à bord du crawler. Les commandes:
+    <ul>
+      <li>NUMPAD +: Accélérer</li>
+      <li>NUMPAD -: Ralentir</li>
+      <li>NUMPAD 1: Touner à gauche</li>
+      <li>NUMPAD 3: Touner à droite</li>
+      <li>NUMPAD 5 ou 2: Centrer le mouvement</li>
+      <li>J: Attacher / détacher le Mobile Launcher (ML) ne fonctionne qu'à l'arrêt</li>
+      <li>NUMPAD 7: Ouvre la porte de la baie #1 du VAB</li>
+      <li>NUMPAD 8: Ouvre la porte de la baie #3 du VAB</li>
+    </ul>
+    Les vues:
+    <ul>
+      <li>1: Cabine de pilotage avant</li>
+      <li>2: Cabine de pilotage arrière</li>
+      <li>3: Sur le Mobile Launcher</li>
+      <li>4: Au sol</li>
+      <li>5: Vue vers l'avant de la voie</li>
+      <li>6: Vue vers l'arrière de la voie</li>
+      <li>7: Vue arrière droite</li>
+    </ul>
+    Source: [Project Apollo - NASSP - Saturn V Rollout checklist](https://nassp.space/index.php/Saturn_V_Rollout_checklist)
+  </p>
+</body>
+</html>
+END_HYPERDESC
+
+BEGIN_ENVIRONMENT
+  // ProjectApollo\Sol nous donne un VAB complet contairement à ProjectApollo\Sol_VirtualAGC usuellement employé.
+  System ProjectApollo\Sol
+  // 28 aout 1972 8h00 du matin au KSC, fuseau EDT=UTC-4. Donc 28/08/1972 12:00:00 UTC. MJD=41557.5
+  // On en profite pour évaluer le MISSNTIME. Décollage prévu le 07/12/1972 02:53:00 UTC. MJD=41658.120139
+  // Donc on est (41658.120139-41557.5)*24*60*60=14395980s avant le décollage prévu.
+  Date MJD 41557.5
+  // Script Hack/A17-005
+END_ENVIRONMENT
+
+BEGIN_FOCUS
+  Ship Crawler-Transporter
+END_FOCUS
+
+BEGIN_CAMERA
+  TARGET Crawler-Transporter
+  MODE Cockpit
+  FOV 56.77
+END_CAMERA
+
+BEGIN_SHIPS
+America:ProjectApollo\Saturn5
+// Apollo 17 
+// Saturn V SA-512
+// CSM-114 America
+// LM-12 Challenger
+// Le lanceur est dans le VAB sur la ML-3 en cours d'assemblage.
+  STATUS Landed Earth  
+  BASE Cape Canaveral:2
+  HEADING 270.00
+  ATTACHED 0:0,ML-3
+  // Le plein n'a pas été fait.    
+  FUEL 0.0
+  // Apollo 17
+  APOLLONO 17
+  // NASSP v8.0 beta
+  NASSPVER 80002
+  // Saturn V SA-512
+  VECHNO 512
+  // On se met en ROLLOUT_STAGE (il n'a a pas plus précoce).
+  STAGE 1
+  // Le build status va de 0 à 5. On part du plus précoce: 0=aucun stage sur le LMP
+  BUILDSTATUS 5
+  // Supprimé pour test, conservé pour archive.
+  // STAGESTATUS 0
+  // Supprimé pour test, conservé pour archive.
+  // DOCKSTATE 0
+
+  MISSNTIME -8693580
+
+  // S-I, S-II, S-IV réservoirs vides.
+  SIFUELMASS 0.0
+  // SIFUELMASS 2153110.00000
+  SIIFUELMASS 0.0
+  // SIIFUELMASS 455806.00000
+  S4FUELMASS 0.0
+  // S4FUELMASS 108914.00000
+  SIEMPTYMASS 133521.00000
+  SIIEMPTYMASS 40163.00000
+  S4EMPTYMASS 13747.00000
+  INTERSTAGE 3908.00000
+  SMMASS 5536.09487585
+  CMMASS 5734.76833391
+  // SM et CM réservoirs vides.
+  SMFUELLOAD 0.0
+  // SMFUELLOAD 18480.26033854
+  CMFUELLOAD 0.0
+  // CMFUELLOAD 105.68702221
+  LANG English
+  LEMN Challenger
+  LMDSCFUEL 8874.17185
+  LMASCFUEL 2386.66697
+  LMDSCEMPTY 2791.72496
+  LMASCEMPTY 2144.67544
+  AUTOSLOW 1
+END
+ML-3:ProjectApollo\ML
+  STATUS Landed Earth
+  POS -80.6505790 28.5864240
+  HEADING 75.04
+  // On a ajusté la hauteur pour que ca corresponde aux plots sur lesquels la plateforme est posée.
+  TOUCHDOWNPOINTHEIGHT -71.4
+  // State -2 = STATE_VABBUILD.
+  STATE -2
+  // Grue somitale en position "normale".
+  CRANEPROC 0.0
+  // Amortisseur relevé.
+  DAMPERARMPROC 1 1.0
+  // Passerelle d'accès au CM retirée.
+  CMARMPROC 1.0
+  // Tous les swing arms retirés.
+  SWINGARMPROC 1 1.0
+  // Les deux bras du 2eme étage retirés.
+  S2INTERPROC 1 1.0
+  S2AFTARMPROC 1 1.0
+  LVNAME America
+END
+VAB:ProjectApollo\VAB
+  STATUS Landed Earth
+  POS -80.6509830 28.5860480
+  HEADING 75.04
+END
+Crawler-Transporter:ProjectApollo\Crawler
+  STATUS Landed Earth
+  POS -80.6515150 28.5904360
+  HEADING 122.06
+  ALT -0.174
+END
+MSS:ProjectApollo\MSS
+  STATUS Landed Earth
+  POS -80.6199329 28.5953797
+  HEADING 65.34
+  ALT 67.065
+  AROT -132.622 59.878 164.062
+  AFCMODE 7
+  TOUCHDOWNPOINTHEIGHT -67.250000000000
+END
+END_SHIPS
+
+BEGIN_ExtMFD
+END

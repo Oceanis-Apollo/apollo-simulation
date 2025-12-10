@@ -1,0 +1,53 @@
+Installer Orbiter 2016 dans D:\Apollo
+
+Déploiement classique de D3D9Client
+Conf vidéo full screen windows.
+Après installation de D3D9Client, doc file:///D:/Apollo/Doc/D3D9Client.pdf, onglet "Video", bouton "Advanced", appuyer sur "Create symbolic links".
+
+Installer Orbiter Sound
+
+Copie des fichiers texture earth dans D:\Apollo\Textures\Earth\Archive et moon dans  D:\Apollo\Textures\Moon\Archive.
+Ajouter les fichiers label Earth et Moon.
+
+Installer classiquement microtextures.
+
+Installer classiquement NASSP.
+
+Les tests qui suivent montrent que les modifs de configuration graphiques sont inutiles.
+Test config graphique
+000_000.png
+Terrain resolution 66%->100%
+000_001.png
+Mesh resolution 32->64
+000_002.png
+Anisotropic filtering 4x->16x
+000_003.png
+Surface Microtexture/Texture filter 4x->16x
+000_004.png
+Tile mipmap policy Low level only->none
+000_005.png
+
+Sur recommandation d'une trace au démarrage: onglet "Visual Effects": linear interpolation
+
+Extra/Vessel Configuration/Project Apollo Configuration/Miscellaneous/Max time acceleration: 20 (conseil de nullentout pas dépasser 20, plus loin il dit 10). NOTA: on ne peut pas atteindre 20 avec la touche R.
+Au même endroit décocher "enable automatic checklist execution", et "slow atomatic checklist...".
+Dans l'onglet "Visuals" on choisit "High resolution", et deux fois "Single continous pannel".
+
+Mission Pause MFD (missionTimerMFD) installation classique. Activer le module mTimerMFD.
+
+Sur l'onglet scenarios: start paused
+
+Activer le module Custom MFD
+Installer classiquement AbsoluteKillrot, et activer le module.
+
+Nullentout propose d'installer les deux modules suivants, mais ils plantent le logiciel.
+!KO CheckListMFD
+!KO ChecklistMFD2
+
+Activer le module ProjectApolloMFD
+
+Backup du répertoire scenarios, et réorganisation de celui qui reste en place.
+
+Activer le module scnEditor.
+
+Installer classiquement LunarTransferMFD (LTMFD), activer le module.

@@ -1,0 +1,64 @@
+FDAI
+FDAI #1 sur le panneau 1
+FDAI #2 sur le panneau 2
+IMU: centrale inertielle
+GDC: Système de gyroscopes complémentaire
+En standard FDAI#1->IMU FDAI#2->GDC
+PGNCS: Primary Guidance Navigation and Control System= IMU+CMC+OSS
+
+PGNCS alimenté par AC
+5|G/N PWR: sw alimentation AC1 ou AC2 ou OFF (G/N=Guidance and Navigation)
+5|GUIDANCE/NAVIGATION|POWER|AC1,AC2: cb pour l'alimentation du G/N
+
+1|FDAI|SELECT:sw 
+	1/2 les deux FDAI#1 IMU, FDAI#2 attitude
+	2 et 1 FDAI respectif afficher SOURCE
+1|FDAI|SOURCE:
+	CMC: ordinateur
+	ATT: attitude définie dans 1|ATTITUDE SET (après GDC ALIGN).
+Carnet Systèmes Apollo p 39.
+
+
+
+ORDEAL
+Modifie les mesures d'attitude pour compenser la rotation autour de la Terre ou la Lune.
+
+
+
+Extraction du LM
+Apollo 11 - 05
+Pour les Pyro cf schemas:
+TECHNO 1, p5, Fig. 6
+TECHNO 1, p10, Fig. 10
+La chaine qui conduit à CSM/LV SEP utilise:
+250|PYRO A|SEQ A: Alimentation du PYRO BUS A par BAT PYRO A
+250|PYRO B|SEQ B: Idem B
+250|PYRO A|BAT BUS A TO PYRO BUS TIE: En cas de pb permet d'alimenter PYRO BUS A par BAT BUS A, soit avec BAT A soit BAT C.
+250|PYRO B|BAT BUS B TO PYRO BUS TIE: Idem B.
+On a alimenté PYRO BUS A et/ou B...
+250|BAT A POWER ENTRY/POST LANDING: cb de sortie de la chaine issue de PYRO BUS A.
+250|BAT B POWER ENTRY/POST LANDING: Idem B
+8|SEQ EVENTS CONT SYS|LOGIC: cb de protection en sortie de PYRO BUS A ou B
+8|SEQ EVENTS CONT SYS|ARM: cb de protection suivant en sortie de PYRO BUS A ou B
+8|SEQ EVENTS CONT SYS|LOGIC: sw activation sortie de PYRO BUS A ou B
+8|SEQ EVENTS CONT SYS|ARM: sw activation suivant en sortie de PYRO BUS A ou B
+Dock probe
+8|DOCK PROBE: cb Alimentation de la commande de dock probe.
+2|DOCKING PROBE:EXTD/REL etendu (vide), passage auto en RETRACT (rayé)
+2|DOCKING PROBE|RETRACT|PRIM,SEC:commande de fixation redondée (vide)
+
+Mise sous tention du LM
+5|LM PWR-1|MNB: cb alimentation LM par SM
+2|LM PWR|CSM: sw alimentation LM par SM (faire RESET avant)
+
+
+
+Decrochage SIVB
+ATTENTION: aucun bruit... Mesurer avec ΔV.
+278|UPRIGHTING SYSTEM|SIVB SEP:cb de commande séparation LM/SIVB alimentation par le bus PYRO A ou PYRO B.
+2|SIVB/LM SEP: sw de séparation SIVB/LM.
+
+
+
+CTRL i: Informations vaisseaux=> masses
+m livres=m kg/0.453592

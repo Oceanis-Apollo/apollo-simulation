@@ -1,0 +1,89 @@
+1) Alimentation électrique:
+Production électrique par 3 piles à combustible 1 2 3
+Assistées par 3 Batteries A B C
+Les piles sont dans le SM. Lorsque le CM est séparé on passe sur batteries.
+On a deux bus principaux MAIN A et B. Normalement alimentés par les SMBUS A et B, et éventuellement par BATBUS A et B.
+Pas possible d'avoir une situation cold and dark avec les piles éteintes en NASSP 8.
+La doc Nulentout semble OK à part le fait que les piles à combustible sont désormais correctement simulées, et on ne peut pas les redémarrer.
+
+
+
+2) RCS CSM:
+Si on regarde le SM depuis l'arrière vers l'avant, les quads sont:
+ A
+D B
+ C
+Les 1 2 font du roulis, 3 4 lacet et cabrage
+Modification depuis la doc Nulentout, pour la translation:
+https://www.orbiter-forum.com/threads/no-translation-control-nassp-apollo-8.35432/
+Il semble, qu'à cause du déplacement d'une alim de commandes RCS vers un autre groupe, il puisse être nécessaire de faire:
+8|SEQ EVENTS CONT SYS|A-ARM-B|BAT A,BAT B
+2|RCS|CMD|ON
+Reactiver CMD|ON est indispensable même si ca avait été fait avant.
+Contrib Nulentout: http://orbiter.dansteph.com/forum/index.php?topic=5858.0
+Pour faire fonctionner les RCS on a en redondances deux réservoirs de comburant et de carburant (PRIM et SEC). Les comburants sont compressés dans leur réservoir par une vessie d'Hélium (HELIUM1 et HELIUM2). Les quads ont besoin d'être réchauffés par une thermo résistance. 
+8|REACTION CONTROL SYSTEM
+	8|REACTION CONTROL SYSTEM|SM HEATERS: cb des résistances de chauffage
+	8|REACTION CONTROL SYSTEM|PRPLNT ISOL: cb des vannes d'alimentation en ergols
+	8|REACTION CONTROL SYSTEM|RCS LOGIC: cb des commandes des moteurs
+	2|SM RCS|HELIUM1-2: sw commande des vannes d'helium
+	2|SM RCS|PRIM PRPLNT-SEC PRPLNT: sw commande des vannes d'ergols 
+	2|RCS|CMD: switch de commande des moteurs
+	2|SM RCS HEATERS: sw selecteur de réchauffeur de quad (prim sec ou off)
+	2|SM RCS: aff de gauche  droite:
+		température quad
+		pression d'helium
+		pression ergols sec
+		température hélium/quantité ergols (commandé par 2|SM RCS IND)
+		Le quad concerné est indiqué par le selecteur 2|RCS INDICATORS
+	8|AUTO RCS SELECT: sw alimentations des vannes moteur
+		position officielle: hhhh hbhb bhhb hbbh
+	1|TRANS CONTR: sw activation du mode translation
+	ATTENTION: Pour les translations il nous faut aussi (bug?):
+		8|SEQ EVENTS CONT SYS|A-ARM-B|BAT A,BAT B
+		2|RCS|CMD|ON
+	1|SC CONT: SCS(manette) ou CMC(ordinateur)
+RHC: manette de commande des rotations et translation. Normalement il y en a 2, mais un seul est simulé.
+Il y a deux modes d'action sur les RHC. Soit on incline la manette de moins de 11,5° on est en mode "normal", et au delà (en butée) on est en mode "direct".
+	2|RCS|TRNFR: sw Transfert des commandes RHC sur CM ou SM.
+	1|ROT CONTR PWR: sw activation des modes de contrôle rotation normal et direct.
+
+On dirait que:
+	Pour les translations il faut
+		8|AUTO RCS SELECT et 1|TRANS CONTR
+	Pour les rotations
+		1|ROT CONTR PWR|DIRECT
+		ou
+		8|AUTO RCS SELECT et 1|ROT CONTR PWR|NORMAL
+
+
+
+3) Direct Ullage:
+8|STABILIZATION CONTROL SYSTEM|DIRECT ULL: cb direct ullage
+Il faut juste que les vannes d'ergols soient ouvertes. Idéalement il faut la même chose pour les vannes d'hélium mais on peut faire avec du résiduel.
+BUG: EN coupant des quads on n'obtient pas de rotation par ullage.
+
+
+
+4) RCS du CM:
+Uniquement des rotations.
+Deux groupes de moteurs 1 et 2. Les moteurs sont 11, 12, ... 16, 21, 22, ... 26.
+11 et 21 produisent la même action (+roulis)
+Voici les actions:
+x1 +roulis
+x2 -roulis
+x3 +cabrage
+x4 -cabrage
+x5 +lacet
+x6 -lacet
+ATTENTION: chauffage des RCS, il faut 20mn pour que ce soit bien chaud.
+	8|REACTION CONTROL SYSTEM|CM HEATER: cb des chauffages des RSC CM.
+	101|CM RCS: sw Commande de chauffage des RCS CM.
+	2|CM RCS PRES: psw Charge explosive permettant de pressuriser les réservoirs de propergols RCS en helium.
+	2|CM RCS PRPLNT: sw Commande des vannes d'ergols.
+	2|RCS|TRNFR: sw Transfet des commandes RHC sur CM ou SM. C'est fait en auto à la séparation, mais ce sw astable permet si nécessaire de transférer le controle de CM à SM et réciproquement.
+	2|CM RCS: aff de gauche à droite:
+		Température
+		Pression d'hélium
+		Pression d'ergols
+		nop

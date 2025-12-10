@@ -1,0 +1,41 @@
+EVA en vol
+La décompression explosive n'est pas prise en charge par la simulation.
+
+Ouverture
+2|CABIN FAN: sw 1 2 ventilation (circulation d'air)
+2|SUIT COMPR ΔP: Différence entre pression dans le scaphandre et dans la cabine. 
+2|PRESS|SUIT,CABIN: pressions dans les scaphandres et dans la cabine. Avant d'ouvrir ca doit être supérieur dans suit.
+326|OXYGEN|SURGE TANK: Réservoir O2 supplémentaire, utilisé en backup lors du vol, et source de O2 après la séparation CM. -> off
+326|SM SUPPLY: On peut supposer que c'est l'alimentation en O2 en provenance du SM (même O2 que pour les piles à combustible) c'est la source principale pendant le vol -> off
+326|REPRESS PKG: Un autre réservoir de O2 semble-t'il (à quoi sert-il? Peut être un réservoir, ou une valve qui va servir à remettre la cabine sous pression) -> off
+https://history.nasa.gov/afj/aoh/aoh-v1-2-07-ecs.pdf p6/31
+
+380|SUIT CIRCUIT RETURN VALVE: ? -> release (pousser)
+380|DEMAND REG: -> Both
+380|SUIT TEST: -> Off
+
+2|O2 FLOW: (tout en haut) indicateur débit oxygène en cabine doit être nul.
+
+ATTENTION Il est possible que les affichages 6xx soient absent pour les faire apparaitre/disparaitre clique en bas à gauche ou à droite.
+Valve d'égalisation des pressions (manette tournante à gauche du hublot) la placer à 16h. Vide la cabine.
+La pression dans la cabine 2|PRESS|CABIN diminue vers 0.
+601|REPRESS O2 VALVE: A droite du hublot désécurisé et ouvert ca vide un réservoir tampon (qu'est ce que c'est? Repress pkg?) Affichage OXYGEN REPRESS PRESSURE GAUGE à gauche du hublot
+2|PRESS|CABIN: est nulle
+2|TEMP|CABIN: est assez basse
+
+On tourne les deux verrous dans le sens inv des aiguilles d'une montre. On active la manette et la porte s'ouvre.
+
+
+
+Refermer
+Verrou dans le sens des aiguilles d'une montre
+Manette
+
+
+
+
+Mise à jour Vecteur d'Etat
+MFD Apollo->TELE->SV
+affiche la checklist
+->SV déclenche le rocessus de transfert (DSKY update activity)
+Par sécurité, passer 3|PCM BIT RATE sur low.
