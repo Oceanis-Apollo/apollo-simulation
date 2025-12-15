@@ -1,0 +1,60 @@
+BEGIN_DESC
+Apollo 17
+
+https://en.wikipedia.org/wiki/Apollo_17
+
+Launch programmed 1972-12-07 02:53:00 UTC. It was interrupted 30s before launch. Launch has been shifted to 1972-12-07 05:33:00 UTC
+We're 5 minutes 30 seconds before effective launch time: 1972-12-07 05:27:30 UTC = 41658.227431 MJD
+END_DESC
+
+BEGIN_ENVIRONMENT
+  System AMSO\Sol
+  Date MJD 41658.227431
+END_ENVIRONMENT
+
+BEGIN_FOCUS
+  Ship AS-512
+END_FOCUS
+
+BEGIN_CAMERA
+  TARGET AS-512
+  MODE Extern
+  POS 3.40 0.00 -91.82
+  TRACKMODE TargetRelative
+  FOV 60.00
+END_CAMERA
+
+BEGIN_HUD
+  TYPE Surface
+END_HUD
+
+BEGIN_MFD Left
+  TYPE Map
+  REF Earth
+  BTARGET Cape Canaveral
+  OTARGET Moon
+  TRACK ON
+END_MFD
+
+BEGIN_MFD Right
+  TYPE Surface
+  SPDMODE 1
+END_MFD
+
+BEGIN_SHIPS
+AS-512:AMSO\Apollo
+  STATUS Landed Earth
+  BASE Cape Canaveral:1
+  HEADING 270.00
+  PRPLEVEL 0:1.000
+  NAVFREQ 0 1 2 3
+  STATE 0
+  LAUNCHTOWER 1
+  AZIMUTCOR 1.503
+  MJDLOI 41661.824560
+  MJDLDG 41662.829861
+  MJDSPL 41670.809039
+  SPLLON -166.11
+  SPLLAT -17.88
+END
+END_SHIPS
