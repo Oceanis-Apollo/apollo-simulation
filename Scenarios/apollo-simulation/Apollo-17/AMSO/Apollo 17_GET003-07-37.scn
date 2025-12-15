@@ -1,11 +1,11 @@
 BEGIN_DESC
-5mn avant la TLI IMFD réglé
+003:07:37 GET
+5mn before TLI IMFD ready to be set in Auto Burn.
 END_DESC
 
 BEGIN_ENVIRONMENT
   System AMSO\Sol
   Date MJD 41658.3615496000
-  Help CurrentState_img
 END_ENVIRONMENT
 
 BEGIN_FOCUS

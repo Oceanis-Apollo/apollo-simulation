@@ -1,12 +1,11 @@
 BEGIN_DESC
-Orbiter saved state at T = 4358
-1h00 avant la TLI
+002:12:37 GET
+1 hour before TLI. Check IMFD.
 END_DESC
 
 BEGIN_ENVIRONMENT
   System AMSO\Sol
   Date MJD 41658.3233610932
-  Help CurrentState_img
 END_ENVIRONMENT
 
 BEGIN_FOCUS
