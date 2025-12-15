@@ -1,0 +1,156 @@
+BEGIN_DESC
+5mn avant la TLI IMFD réglé
+END_DESC
+
+BEGIN_ENVIRONMENT
+  System AMSO\Sol
+  Date MJD 41658.3615496000
+  Help CurrentState_img
+END_ENVIRONMENT
+
+BEGIN_FOCUS
+  Ship AS-512
+END_FOCUS
+
+BEGIN_CAMERA
+  TARGET AS-512
+  MODE Cockpit
+  FOV 56.00
+END_CAMERA
+
+BEGIN_HUD
+  TYPE Surface
+END_HUD
+
+BEGIN_MFD Left
+  TYPE User
+  MODE Interplanetary
+  Scenario Old2
+  MapMFD V5
+  Reference moon
+  Target moon
+  Center moon
+  Data 0 1 4.901537949236977e-005 0 0 1 1 0 1 0 0 0
+  MassLimit 1e+020
+  CMode 2
+  Config 1 1 1 1 600000 0
+  ExtMode 2
+  Periapis Moon
+  END 
+  CorMFD V4
+  Reference Earth
+  Target Moon
+  Source AS-512
+  ActiveProg 1 1
+  DataA 1 3 0 0 0 0
+  DataB 1 10 41658.36502568702 0 0 5.484526841496721 0 41661.82457756293 0
+  DVProg 0 0 0 1
+  AdvConf 0.2967059728390361 6.000441968356508 11923872.16284782 2 0
+  Guidance 1
+  END 
+  EjectMFD V5
+  Reference Auto
+  Data 0 1 3 0 1 41658.24183991803 10
+  Guidance 0
+  END 
+  BaseAprMFD V2
+  Reference Auto
+  Target none
+  Source none
+  DataA 0 0 120000 0.10821 0.366519 1 1 41658.24183991803 41658.24183991803 0
+  DataB 0 3 0 1 0 1
+  END 
+  SlingMFD V4
+  Reference Auto
+  Source none
+  Data 0 1 1 3 0 1 41658.24183991803 0
+  END 
+  LaunchMFD V4
+  Target None
+  Data 0 1 1 3 0 1 0
+  END 
+  CF1_DataA 1 0
+  CF1_DataB 41658.231254263 10 120000 2 20 150000
+  CF1_SecTgt 
+  mfdShare -1
+  mfdProgram 2
+END_MFD
+
+BEGIN_MFD Right
+  TYPE User
+  MODE Interplanetary
+  Scenario Old2
+  MapMFD V5
+  Reference moon
+  Target moon
+  Center moon
+  Data 0 1 4.901537949236977e-005 0 0 1 1 0 1 0 0 0
+  MassLimit 1e+020
+  CMode 2
+  Config 1 1 1 1 600000 0
+  ExtMode 2
+  Periapis Moon
+  END 
+  CorMFD V4
+  Reference Earth
+  Target Moon
+  Source AS-512
+  ActiveProg 1 1
+  DataA 1 3 0 0 0 0
+  DataB 1 10 41658.36502568702 0 0 5.484526841496721 0 41661.82457756293 0
+  DVProg 0 0 0 1
+  AdvConf 0.2967059728390361 6.000441968356508 11923872.16284782 2 0
+  Guidance 1
+  END 
+  EjectMFD V5
+  Reference Auto
+  Data 0 1 3 0 1 41658.24183991803 10
+  Guidance 0
+  END 
+  BaseAprMFD V2
+  Reference Auto
+  Target none
+  Source none
+  DataA 0 0 120000 0.10821 0.366519 1 1 41658.24183991803 41658.24183991803 0
+  DataB 0 3 0 1 0 1
+  END 
+  SlingMFD V4
+  Reference Auto
+  Source none
+  Data 0 1 1 3 0 1 41658.24183991803 0
+  END 
+  LaunchMFD V4
+  Target None
+  Data 0 1 1 3 0 1 0
+  END 
+  CF1_DataA 1 0
+  CF1_DataB 41658.231254263 10 120000 2 20 150000
+  CF1_SecTgt 
+  mfdShare 0
+  mfdProgram 4
+END_MFD
+
+BEGIN_SHIPS
+AS-512:AMSO\Apollo
+  STATUS Orbiting Earth
+  RPOS -1899896.757 267974.850 6249583.247
+  RVEL -7416.7744 -1038.6566 -2210.3810
+  AROT -151.981 73.990 114.258
+  AFCMODE 7
+  PRPLEVEL 0:0.717883
+  NAVFREQ 0 1 2 3
+  XPDR 0
+  STATE 7
+  ABORTSTATUS 0
+  ABO1TYP 0
+  MJDLOI 41661.824560
+  MJDLDG 41662.829838
+  MJDSPL 41670.809016
+  SPLLON -166.110000
+  SPLLAT -17.880000
+  MISSIONTIME 11257.500882
+  PWR 0.000000
+  APPW 0
+  AZST 2
+END
+END_SHIPS
