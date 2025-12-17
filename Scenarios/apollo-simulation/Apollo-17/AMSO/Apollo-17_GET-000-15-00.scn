@@ -1,6 +1,6 @@
 BEGIN_DESC
-000:15:00 GET 
-In Earth orbit.
+GET 000:15:00 
+After Earth orbit insertion.
 END_DESC
 
 BEGIN_ENVIRONMENT
